@@ -1,0 +1,72 @@
+public class Dictionary {
+  // Private data fields
+  public ArrayList<String> dict;
+
+  Dictionary() {
+    dict = new ArrayList<String>();
+
+  }
+
+  public void add (String s){
+    dict.add(s);
+  }
+
+  public int size (){
+    return dict.size();
+  }
+
+  public String get(int i) {
+    return dict.get(i);
+  }
+
+  public ArrayList<String> getList(){
+    return dict;
+  }
+
+  public static void main(String[] args) throws IOException {
+    if (args.length < 1) {
+      System.out.print("Must have a file.");
+      System.exit(1);
+    }
+
+    try {
+      File dictionaryFile = new File(args[0]);
+
+      Scanner fin = new Scanner(dictionaryFile);
+
+      System.out.println(dictionaryFile.getAbsolutePath());
+
+      if (!dictionaryFile.exists()) {
+        System.out.println("Dictionary " + args[0] + "does not exist");
+      }
+
+      else if (!dictionaryFile.canRead()) {
+        System.out
+            .println("Dictionary " + args[0] + " cannot be read.");
+      }
+      Dictionary dict = new Dictionary();
+      while (fin.hasNext()) {
+        dict.add(fin.nextLine());
+      }
+
+      for (int i = 0; i < dict.size(); i++) {
+        System.out.println(dict.get(i));
+      }
+
+    } catch (FileNotFoundException e) {
+      System.out.println("No such file found " + args[0]);
+    }
+ }
+}
+
+/**
+ *This is the class I want to reference the array in 
+ */
+public class FindWords {
+
+  public static void main(String[] args) {
+    Dictionary dictionary = new Dictionary();
+    System.out.print(dictionary.getList());
+
+  }
+}
